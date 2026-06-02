@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# [ISHI Blog](https://ishi.blog)
 
-## Getting Started
+Next.js (App Router) + MDX で作る、シンプルなブログサイトです。
 
-First, run the development server:
+## 使い方
+
+### 開発サーバー
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`http://localhost:3000` で確認。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 本番ビルド
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## 記事を書く
 
-To learn more about Next.js, take a look at the following resources:
+`content/posts/` に `.mdx` ファイルを1つ追加するだけで記事が増えます。
+ファイル名（拡張子を除く）がそのまま URL の slug になります。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+例: `content/posts/my-first-post.mdx` → `/posts/my-first-post`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### frontmatter
 
-## Deploy on Vercel
+各ファイルの先頭に、次のメタ情報を書きます。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```yaml
+---
+title: "記事タイトル"
+date: "2026-06-02"        # 新しい順で一覧に並ぶ
+description: "短い説明"     # 一覧・メタ情報に使う
+tags: ["タグA", "タグB"]   # /tags/タグ名 でまとめて読める
+draft: false              # true にすると非公開（下書き）
+---
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+本文は frontmatter の下に Markdown / MDX で書きます。
+
+## 構成
+
+| 場所 | 役割 |
+| --- | --- |
+| `content/posts/*.mdx` | 記事の本体 |
+| `src/lib/posts.ts` | 記事の読み込み・一覧・タグ集計 |
+| `src/app/page.tsx` | トップ（記事一覧） |
+| `src/app/posts/[slug]/page.tsx` | 記事ページ |
+| `src/app/tags/[tag]/page.tsx` | タグ別一覧 |
+| `src/components/` | ヘッダー・テーマ切替・カード等 |
+
+## 公開（デプロイ）
+
+[Vercel](https://vercel.com) にこのリポジトリを連携して push すれば、設定なしで公開できます。
+
+## 後から足しやすいもの
+
+- シンタックスハイライト: `rehype-pretty-code` を MDX のプラグインに追加
+- RSS: `src/app/feed.xml/route.ts` を追加し `getAllPosts()` を利用
+- OGP 画像 / 検索 / ページネーション など

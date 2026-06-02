@@ -1,0 +1,38 @@
+---
+title: "記事の書き方 — このブログの使い方"
+date: "2026-06-01"
+description: "新しい記事を追加する手順と frontmatter の書き方をまとめます。"
+tags: ["nextjs", "ガイド"]
+draft: false
+---
+
+新しい記事を書くには、`content/posts/` に `.mdx` ファイルを1つ追加するだけです。
+ファイル名（拡張子を除いた部分）がそのまま URL の slug になります。
+
+例: `content/posts/my-first-post.mdx` → `/posts/my-first-post`
+
+## frontmatter
+
+各記事の先頭に、次のメタ情報を書きます。
+
+```yaml
+---
+title: "記事タイトル"
+date: "2026-06-02"
+description: "一覧やメタ情報に使う短い説明"
+tags: ["タグA", "タグB"]
+draft: false
+---
+```
+
+- `date` の新しい順でトップに並びます。
+- `tags` を付けると `/tags/タグ名` でまとめて読めます。
+- `draft: true` にすると公開されません（下書き）。
+
+## ローカルで確認する
+
+```bash
+npm run dev
+```
+
+`http://localhost:3000` で確認できます。
