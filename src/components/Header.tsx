@@ -11,6 +11,9 @@ export function Header() {
         <Link href="/" className="opacity-80 hover:opacity-100">
           記事
         </Link>
+        <Link href="/artifacts/" className="opacity-80 hover:opacity-100">
+          アーティファクト
+        </Link>
         <ThemeToggle />
       </nav>
     </header>
