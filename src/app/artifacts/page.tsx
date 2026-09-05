@@ -47,6 +47,12 @@ export default function Home() {
           link: "https://claude.ai/public/artifacts/8bdef560-f49f-4639-8990-d705bae9b9f8",
           description: "9月の長期休暇は海外旅行したいけど3カ国で迷っているので比較してみたアプリ"
         }} />
+
+        <ArtifactCard artifact={{
+          title: "SW Turkey Travel Plan",
+          link: "https://sw-turkey.netlify.app/",
+          description: "9月シルバーウィークのトルコ旅行プラン"
+        }} />
       </div>
     </div>
   );
